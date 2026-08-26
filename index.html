@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Steps Education — Minor Injury Joint Assessment Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1B2A4A;--ink-soft:#4a5670;--paper:#F4F6F9;--card:#ffffff;--line:#dfe1e8;
+  --navy:#1B2A4A;--navy-deep:#101a2e;--navy-wash:#e8eaf1;
+  --red:#C0392B;--red-wash:#fbeae7;
+  --ok:#1f7a4d;--ok-wash:#e6f2ea;--flag:#C0392B;--flag-wash:#fbeae7;
+  --amber:#c9711f;--amber-wash:#fbeede;
+  --sh:#3a6ea5;--el:#b26a2a;--wr:#2a8a86;--hp:#7a5aa5;--kn:#5c8a3a;--an:#a5493a;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --disp:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--body:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+header.top{border-bottom:1px solid var(--line);background:var(--card)}
+.top-inner{display:flex;align-items:center;gap:16px;padding:16px 20px;max-width:1000px;margin:0 auto}
+.brand{display:flex;flex-direction:row;align-items:center;gap:12px;line-height:1.15}
+.brand .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.brand h1{font-family:var(--disp);font-weight:700;font-size:21px;letter-spacing:-.01em;color:var(--navy)}
+.brand .logo{height:44px;width:auto;flex:none}
+.brand .brand-text{display:flex;flex-direction:column}
+.top-meta{margin-left:auto}
+.pill{font-family:var(--mono);font-size:11px;color:var(--ink-soft);border:1px solid var(--line);padding:5px 10px;border-radius:999px;white-space:nowrap}
+
+.intro{padding:34px 0 6px}
+.intro .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.intro h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,3.6vw,36px);line-height:1.1;letter-spacing:-.02em;max-width:24ch}
+.intro p.lede{font-size:16px;color:var(--ink-soft);max-width:64ch;margin-top:14px}
+
+/* sticky controls */
+.controls{position:sticky;top:0;z-index:40;background:var(--paper);padding:16px 0 10px;border-bottom:1px solid var(--line);margin-top:22px}
+.searchbar{position:relative;margin-bottom:12px}
+.searchbar input{
+  width:100%;font:inherit;font-size:15px;padding:13px 16px 13px 42px;border:1px solid var(--line);
+  border-radius:10px;background:var(--card);color:var(--ink)
+}
+.searchbar input:focus{outline:2px solid var(--navy);outline-offset:1px}
+.searchbar .ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-size:15px}
+.searchbar .clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:var(--ink-soft);font-size:18px;display:none;padding:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:13px;cursor:pointer;background:var(--card);border:1px solid var(--line);color:var(--ink-soft);padding:7px 13px;border-radius:8px;transition:all .12s;display:inline-flex;align-items:center;gap:7px}
+.chip:hover{border-color:#c9ccc0}
+.chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chip.active{color:#fff;border-color:transparent}
+.chip.all.active{background:var(--ink);color:#fff}
+.count-note{font-size:12.5px;color:var(--ink-soft);font-family:var(--mono);margin-top:10px}
+
+/* region blocks */
+.region{padding:26px 0 4px}
+.region-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.region-head .bar{width:4px;height:26px;border-radius:3px}
+.region-head h3{font-family:var(--disp);font-weight:600;font-size:22px}
+.region-head .n{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+
+/* test card / accordion */
+.test{background:var(--card);border:1px solid var(--line);border-radius:11px;margin-bottom:10px;overflow:hidden}
+.test-head{width:100%;text-align:left;font:inherit;background:none;border:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;gap:14px}
+.test-head:hover{background:var(--paper)}
+.test-head .caret{font-size:13px;color:var(--ink-soft);transition:transform .18s;flex:none;width:14px}
+.test.open .test-head .caret{transform:rotate(90deg)}
+.test-head .tt{flex:1;min-width:0}
+.test-head .name{font-weight:600;font-size:16px}
+.test-head .aka{font-size:12.5px;color:var(--ink-soft);margin-top:1px}
+.test-head .struct{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:6px;color:#fff;white-space:nowrap;flex:none}
+
+.test-body{display:none;padding:2px 18px 20px;border-top:1px solid var(--line)}
+.test.open .test-body{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.tfig{margin:14px 0 4px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--paper);line-height:0}
+.tfig img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}
+.tfig.placeholder{aspect-ratio:16/6;display:flex;align-items:center;justify-content:center;line-height:1.4;border-style:dashed}
+.tfig.placeholder span{font-family:var(--mono);font-size:12px;color:var(--ink-soft);padding:14px;text-align:center}
+
+.field{margin-top:14px}
+.field .lab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy-deep);margin-bottom:5px}
+.field p{font-size:14.5px}
+.steps{list-style:none;counter-reset:s;margin-top:4px}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 30px;font-size:14.5px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:20px;height:20px;background:var(--navy-wash);color:var(--navy-deep);font-family:var(--mono);font-size:11px;border-radius:50%;display:grid;place-items:center}
+.pos{border-left:3px solid var(--ok);background:var(--ok-wash);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;margin-top:6px}
+.means{border-left:3px solid var(--navy);background:var(--navy-wash);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;margin-top:6px}
+.pearl{border-left:3px solid var(--amber);background:var(--amber-wash);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;margin-top:6px}
+.pearl .lab,.pos .lab,.means .lab{margin-bottom:3px}
+
+.noresults{text-align:center;padding:50px 20px;color:var(--ink-soft)}
+.noresults b{color:var(--ink);font-family:var(--disp);font-size:19px}
+
+footer{border-top:1px solid var(--line);padding:26px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:30px}
+footer .mono{font-family:var(--mono)}
+
+@media(max-width:600px){
+  .test-head .struct{display:none}
+  .test-head .aka{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <img class="logo" src="assets/smart-steps-logo.png" alt="Smart Steps Education">
+      <div class="brand-text">
+        <span class="eyebrow">Smart Steps Education · Minor Injury Assessment Guide</span>
+        <h1>MSK Special Tests · How-To Reference</h1>
+      </div>
+    </div>
+    <div class="top-meta"><span class="pill">Reference, not a test</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="intro">
+      <div class="kicker">Perform · interpret · document</div>
+      <h2>How to perform each test, what it means, and when to trust it.</h2>
+      <p class="lede">A working reference for MSK special tests across the major joints. Each entry covers the structure it examines, how to perform it step by step, what a positive result looks like, and what that result actually tells you. Search by test, structure or condition, or filter by region. Remember a special test supports clinical reasoning, it does not replace it, so interpret every result alongside the history, mechanism and the rest of the examination.</p>
+    </section>
+
+    <div class="controls">
+      <div class="searchbar">
+        <span class="ico">⌕</span>
+        <input id="search" type="text" placeholder="Search a test, structure or condition — e.g. Achilles, ACL, carpal tunnel..." autocomplete="off">
+        <button class="clear" id="clearBtn" onclick="clearSearch()">×</button>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="count-note" id="countNote"></div>
+    </div>
+
+    <div id="results"></div>
+    <div class="noresults" id="noResults" style="display:none">
+      <b>No tests match that search.</b>
+      <p style="margin-top:6px">Try a structure (supraspinatus), a condition (impingement) or a joint.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mono">Smart Steps Education · Train Smart. Step Up. Save Lives.</div>
+    <div style="margin-top:6px">Educational use only. Interpret every special test alongside history, mechanism and full examination, and apply current JRCALC, NICE and local guidance.</div>
+    <div style="margin-top:10px;font-size:11.5px">&copy; Smart Steps Education. For personal study use — not for redistribution or resale.</div>
+  </div>
+</footer>
+
+<script>
+/* dev mode: add ?dev=1 to the URL to see expected image filenames as placeholders */
+const DEV = /[?&]dev=1/.test(location.search);
+
+const REGIONS = {
+  shoulder:{label:"Shoulder",c:"var(--sh)"},
+  elbow:{label:"Elbow",c:"var(--el)"},
+  wrist:{label:"Wrist & hand",c:"var(--wr)"},
+  hip:{label:"Hip",c:"var(--hp)"},
+  knee:{label:"Knee",c:"var(--kn)"},
+  ankle:{label:"Ankle & foot",c:"var(--an)"}
+};
+
+/* ---- TEST BANK ---- */
+const TESTS = [
+/* ===================== SHOULDER ===================== */
+{r:"shoulder",id:"jobes-empty-can",name:"Jobe's (empty can) test",aka:"Empty can test",struct:"Supraspinatus",
+ how:["Abduct the arm to 90 degrees in the scapular plane, roughly 30 degrees forward of the coronal plane.","Internally rotate so the thumb points down, as if emptying a can.","Apply downward pressure while the patient resists."],
+ pos:"Weakness or reproduction of pain against resistance.",
+ means:"Supraspinatus tear or tendinopathy.",
+ pearl:"The thumb-down position provokes impingement, so pain alone is less specific. Weakness is the more telling finding. Compare with the full can test."},
+{r:"shoulder",id:"full-can",name:"Full can test",aka:"",struct:"Supraspinatus",
+ how:["Abduct to 90 degrees in the scapular plane.","Externally rotate so the thumb points up.","Apply downward pressure against resistance."],
+ pos:"Weakness against resistance.",
+ means:"Supraspinatus dysfunction, tested with less impingement provocation than the empty can.",
+ pearl:"Useful when you want to isolate supraspinatus strength without the pain confound of the empty can position."},
+{r:"shoulder",id:"drop-arm",name:"Drop arm test",aka:"",struct:"Rotator cuff (full-thickness)",
+ how:["Passively abduct the arm to around 90 to 120 degrees.","Ask the patient to slowly lower it back to their side under control."],
+ pos:"The arm drops suddenly or the patient cannot control the descent.",
+ means:"A significant, often full-thickness rotator cuff tear.",
+ pearl:"A positive drop arm raises the priority of referral and imaging. It is specific but not very sensitive, so a negative test does not exclude a tear."},
+{r:"shoulder",id:"infraspinatus-er",name:"Infraspinatus / external rotation resistance",aka:"ER lag sign",struct:"Infraspinatus / teres minor",
+ how:["Position the elbow at 90 degrees, tucked at the side.","Ask the patient to externally rotate against your resistance.","For the lag sign, passively hold the arm in external rotation and let go."],
+ pos:"Weakness on resisted external rotation, or the arm drifts back into internal rotation on the lag sign.",
+ means:"Posterior rotator cuff (infraspinatus / teres minor) tear or weakness.",
+ pearl:"Keep the elbow tucked to the side to isolate the posterior cuff rather than recruiting other movers."},
+{r:"shoulder",id:"lift-off",name:"Lift-off test (Gerber's)",aka:"Gerber's test",struct:"Subscapularis",
+ how:["Place the back of the hand against the lumbar spine, palm facing out.","Ask the patient to lift the hand away from the back against resistance."],
+ pos:"Inability to lift the hand off the back, or marked weakness.",
+ means:"Subscapularis tear or dysfunction.",
+ pearl:"Needs enough internal rotation to reach behind the back. If the patient cannot get into position, use the belly press instead."},
+{r:"shoulder",id:"belly-press",name:"Belly press test (Napoleon)",aka:"Napoleon sign",struct:"Subscapularis",
+ how:["Place the flat of the hand on the abdomen.","Ask the patient to press into the belly, keeping the elbow forward and the wrist straight."],
+ pos:"The elbow drops backward or the wrist flexes to compensate.",
+ means:"Subscapularis dysfunction.",
+ pearl:"The go-to subscapularis test when a stiff or painful shoulder cannot manage the lift-off position."},
+{r:"shoulder",id:"hawkins-kennedy",name:"Hawkins-Kennedy test",aka:"",struct:"Subacromial impingement",
+ how:["Flex the shoulder and elbow to 90 degrees.","Support the arm and passively internally rotate the shoulder, dropping the forearm."],
+ pos:"Pain on internal rotation.",
+ means:"Subacromial impingement, often involving supraspinatus.",
+ pearl:"Sensitive but not specific. Combine with Neer's and the painful arc rather than relying on it alone."},
+{r:"shoulder",id:"neers",name:"Neer's impingement test",aka:"",struct:"Subacromial impingement",
+ how:["Stabilise the scapula with one hand.","Internally rotate the arm (thumb down) and passively flex and elevate it fully overhead."],
+ pos:"Pain on elevation.",
+ means:"Subacromial impingement.",
+ pearl:"Stabilising the scapula is what makes the test valid, otherwise scapular movement masks the impingement."},
+{r:"shoulder",id:"painful-arc",name:"Painful arc",aka:"",struct:"Subacromial / AC joint",
+ how:["Ask the patient to actively abduct the arm from the side to fully overhead.","Note where in the range pain occurs."],
+ pos:"Pain between roughly 60 and 120 degrees suggests subacromial pathology. Pain in the last 10 to 20 degrees near full elevation suggests the AC joint.",
+ means:"Subacromial impingement or AC joint pathology depending on the arc.",
+ pearl:"The location of the arc points you at the structure. Mid-arc is subacromial, top-of-arc is AC joint."},
+{r:"shoulder",id:"apprehension",name:"Apprehension test",aka:"Crank test",struct:"Anterior instability",
+ how:["With the patient supine or sitting, abduct the shoulder to 90 degrees.","Slowly externally rotate the arm while watching the patient's response."],
+ pos:"Apprehension, guarding or a sense the shoulder is about to dislocate (not just pain).",
+ means:"Anterior glenohumeral instability.",
+ pearl:"You are looking for apprehension, not pain. Follow immediately with the relocation test to confirm."},
+{r:"shoulder",id:"relocation",name:"Relocation test (Jobe)",aka:"Jobe relocation",struct:"Anterior instability",
+ how:["Reproduce the apprehension position (90 degrees abduction, external rotation).","Apply a posteriorly directed force on the front of the humeral head."],
+ pos:"The apprehension eases with posterior pressure.",
+ means:"Confirms anterior instability suggested by the apprehension test.",
+ pearl:"Only meaningful as a pair with the apprehension test. Relief on relocation is the confirming step."},
+{r:"shoulder",id:"sulcus-sign",name:"Sulcus sign",aka:"",struct:"Inferior instability",
+ how:["With the arm relaxed at the side, grip at the elbow.","Apply steady downward traction on the arm."],
+ pos:"A visible groove or sulcus appears below the acromion.",
+ means:"Inferior or multidirectional instability.",
+ pearl:"A prominent sulcus suggests generalised laxity or multidirectional instability, worth noting before any relocation attempt."},
+{r:"shoulder",id:"speeds",name:"Speed's test",aka:"",struct:"Biceps tendon / SLAP",
+ how:["Position the arm in around 90 degrees of forward flexion, elbow extended, forearm supinated.","Apply downward resistance as the patient holds."],
+ pos:"Pain localised to the bicipital groove.",
+ means:"Biceps tendinopathy or a SLAP lesion.",
+ pearl:"Combine with Yergason's for the biceps and O'Brien's if you suspect a SLAP lesion."},
+{r:"shoulder",id:"yergasons",name:"Yergason's test",aka:"",struct:"Biceps tendon",
+ how:["Flex the elbow to 90 degrees with the forearm pronated.","Resist as the patient supinates the forearm."],
+ pos:"Pain in the bicipital groove, or a sense of the tendon subluxing.",
+ means:"Biceps tendinopathy or transverse humeral ligament laxity with tendon instability.",
+ pearl:"A palpable snap over the groove suggests the tendon is subluxing out of the groove."},
+{r:"shoulder",id:"obriens",name:"O'Brien's active compression",aka:"Active compression test",struct:"SLAP / AC joint",
+ how:["Flex the arm to 90 degrees, adduct 10 to 15 degrees across the body, internally rotate (thumb down).","Resist a downward force. Then fully supinate (palm up) and repeat."],
+ pos:"Pain thumb-down that reduces or clears palm-up. Deep pain suggests a labral / SLAP lesion, pain over the top of the shoulder suggests the AC joint.",
+ means:"SLAP lesion or AC joint pathology depending on where the pain sits.",
+ pearl:"Location matters. Deep and inside the joint points to the labrum, on top of the joint points to the AC joint."},
+{r:"shoulder",id:"cross-body",name:"Cross-body adduction (scarf)",aka:"Scarf test",struct:"AC joint",
+ how:["Support the arm and passively adduct it across the body toward the opposite shoulder."],
+ pos:"Pain localised to the AC joint.",
+ means:"AC joint pathology.",
+ pearl:"Well localised AC joint pain here alongside a top-of-arc painful arc builds a consistent picture."},
+
+/* ===================== ELBOW ===================== */
+{r:"elbow",id:"cozens",name:"Cozen's test",aka:"Resisted wrist extension",struct:"Lateral epicondylitis",
+ how:["Stabilise the elbow, forearm pronated, hand in a loose fist.","Ask the patient to extend the wrist against your resistance."],
+ pos:"Pain at the lateral epicondyle.",
+ means:"Lateral epicondylitis (tennis elbow).",
+ pearl:"Palpate the lateral epicondyle as you resist so you can localise the pain precisely."},
+{r:"elbow",id:"mills",name:"Mill's test",aka:"",struct:"Lateral epicondylitis",
+ how:["Passively pronate the forearm and flex the wrist fully.","Then passively extend the elbow."],
+ pos:"Pain at the lateral epicondyle on elbow extension.",
+ means:"Lateral epicondylitis.",
+ pearl:"A passive counterpart to Cozen's. Reproducing pain on both strengthens the diagnosis."},
+{r:"elbow",id:"medial-epicondylitis",name:"Medial epicondylitis test",aka:"Golfer's elbow test, reverse Cozen's",struct:"Medial epicondylitis",
+ how:["Stabilise the elbow with the forearm supinated.","Resist wrist flexion, or passively extend the wrist and elbow."],
+ pos:"Pain at the medial epicondyle.",
+ means:"Medial epicondylitis (golfer's elbow).",
+ pearl:"Screen the ulnar nerve too, as medial elbow symptoms can overlap with cubital tunnel irritation."},
+{r:"elbow",id:"varus-valgus-elbow",name:"Varus / valgus stress (elbow)",aka:"Collateral ligament stress",struct:"Collateral ligaments",
+ how:["Flex the elbow to around 20 to 30 degrees to unlock the olecranon.","Apply a valgus force to test the medial (ulnar) collateral, and a varus force to test the lateral collateral."],
+ pos:"Pain or laxity compared with the other side.",
+ means:"Medial or lateral collateral ligament injury.",
+ pearl:"Slight flexion is essential, testing in full extension is stabilised by bony congruity and hides laxity."},
+{r:"elbow",id:"elbow-extension",name:"Elbow extension test",aka:"",struct:"Fracture screen",
+ how:["After an acute injury, ask the patient to fully extend both elbows for comparison."],
+ pos:"Inability to fully extend the injured elbow.",
+ means:"Raises the likelihood of a fracture and supports imaging.",
+ pearl:"Full extension with no other concerning signs makes a fracture much less likely, but it does not exclude one. Use clinical judgement alongside it."},
+
+/* ===================== WRIST & HAND ===================== */
+{r:"wrist",id:"finkelsteins",name:"Finkelstein's test",aka:"Eichhoff manoeuvre",struct:"De Quervain's tenosynovitis",
+ how:["Ask the patient to tuck the thumb into the palm and close the fingers over it.","Passively deviate the wrist toward the ulnar (little finger) side."],
+ pos:"Sharp pain over the radial styloid and first dorsal compartment.",
+ means:"De Quervain's tenosynovitis.",
+ pearl:"Mild discomfort can occur normally, so compare sides and look for clearly reproduced, well-localised pain."},
+{r:"wrist",id:"phalens",name:"Phalen's test",aka:"",struct:"Carpal tunnel / median nerve",
+ how:["Ask the patient to hold both wrists in full flexion, pressing the backs of the hands together.","Maintain for up to 60 seconds."],
+ pos:"Tingling or numbness in the thumb, index, middle and radial half of the ring finger.",
+ means:"Carpal tunnel syndrome (median nerve compression).",
+ pearl:"Time it. Symptoms coming on within the 60 seconds are more meaningful than a vague ache."},
+{r:"wrist",id:"tinels-wrist",name:"Tinel's sign (wrist)",aka:"",struct:"Carpal tunnel / median nerve",
+ how:["Tap gently over the median nerve at the carpal tunnel, on the palmar wrist crease."],
+ pos:"Tingling shooting into the median nerve distribution.",
+ means:"Median nerve irritation at the carpal tunnel.",
+ pearl:"Lower sensitivity than Phalen's or carpal compression, so use it as one piece of the picture."},
+{r:"wrist",id:"durkans",name:"Durkan's carpal compression",aka:"Carpal compression test",struct:"Carpal tunnel / median nerve",
+ how:["Apply firm, direct pressure over the carpal tunnel with your thumbs.","Hold for around 30 seconds."],
+ pos:"Median nerve paraesthesia within the hold.",
+ means:"Carpal tunnel syndrome.",
+ pearl:"Generally the most sensitive and specific of the bedside carpal tunnel tests."},
+{r:"wrist",id:"watsons",name:"Watson's scaphoid shift",aka:"Scaphoid shift test",struct:"Scapholunate instability",
+ how:["Apply pressure over the scaphoid tubercle on the palmar side.","Move the wrist from ulnar to radial deviation while maintaining pressure."],
+ pos:"A painful clunk as the scaphoid subluxes.",
+ means:"Scapholunate ligament instability.",
+ pearl:"Different from a scaphoid fracture. This tests ligamentous instability, not the bone itself."},
+{r:"wrist",id:"scaphoid-load",name:"Scaphoid load / snuffbox tenderness",aka:"Anatomical snuffbox test",struct:"Scaphoid fracture",
+ how:["Palpate the anatomical snuffbox on the radial wrist.","Apply axial load or telescoping pressure along the thumb."],
+ pos:"Tenderness in the snuffbox or pain on axial loading.",
+ means:"Suspected scaphoid fracture until imaging says otherwise.",
+ pearl:"Early X-rays can be normal. Snuffbox tenderness after a FOOSH justifies immobilising and re-imaging even on a clear first film, because of the risk of avascular necrosis."},
+{r:"wrist",id:"froments",name:"Froment's sign",aka:"",struct:"Ulnar nerve",
+ how:["Ask the patient to hold a sheet of paper between the thumb and the side of the index finger.","Try to pull the paper away."],
+ pos:"The thumb flexes at the interphalangeal joint to grip, compensating for a weak adductor pollicis.",
+ means:"Ulnar nerve palsy.",
+ pearl:"The compensatory thumb IP flexion is driven by the median-innervated flexor pollicis longus taking over from the failing ulnar-innervated adductor."},
+{r:"wrist",id:"allens",name:"Allen's test",aka:"",struct:"Radial / ulnar artery patency",
+ how:["Ask the patient to clench the fist while you occlude both the radial and ulnar arteries.","Have them open the hand, which should look pale, then release one artery and watch reperfusion. Repeat for the other."],
+ pos:"Delayed or absent colour return when one artery is released.",
+ means:"Compromised flow in that artery or an incomplete palmar arch.",
+ pearl:"Useful before any procedure relying on collateral hand circulation, and to assess vascular status after wrist trauma."},
+
+/* ===================== HIP ===================== */
+{r:"hip",id:"faber",name:"FABER / Patrick's test",aka:"Figure-four test",struct:"Hip or sacroiliac joint",
+ how:["Position the leg in Flexion, ABduction and External Rotation, resting the ankle on the opposite knee (a figure-four).","Gently press down on the flexed knee and the opposite ASIS."],
+ pos:"Groin pain suggests the hip joint. Posterior pain suggests the sacroiliac joint.",
+ means:"Hip joint pathology or sacroiliac joint involvement, depending on pain location.",
+ pearl:"The pain location does the discriminating. Anterior groin is hip, posterior buttock is SI joint."},
+{r:"hip",id:"fadir",name:"FADIR test",aka:"Anterior impingement test",struct:"Femoroacetabular impingement / labrum",
+ how:["Flex the hip to 90 degrees.","Add ADduction and Internal Rotation."],
+ pos:"Sharp groin pain or reproduction of the patient's symptoms.",
+ means:"Femoroacetabular impingement or a labral tear.",
+ pearl:"Sensitive for anterior hip pathology, so a negative FADIR is reasonably reassuring against FAI or a labral cause."},
+{r:"hip",id:"thomas",name:"Thomas test",aka:"",struct:"Hip flexor contracture",
+ how:["With the patient supine, ask them to hold one knee to the chest.","Observe the opposite thigh resting on the couch."],
+ pos:"The straight leg's thigh lifts off the couch.",
+ means:"Hip flexion contracture or tight iliopsoas.",
+ pearl:"Pulling the opposite hip into full flexion flattens the lumbar spine, unmasking a fixed flexion deformity on the resting side."},
+{r:"hip",id:"trendelenburg",name:"Trendelenburg test",aka:"",struct:"Hip abductors (gluteus medius)",
+ how:["Ask the patient to stand on one leg.","Watch the pelvis on the non-standing side."],
+ pos:"The pelvis drops on the side of the lifted leg.",
+ means:"Weakness of the hip abductors on the stance (standing) side.",
+ pearl:"Remember it names the weak side by the stance leg, not the side that drops. The drop is contralateral to the problem."},
+{r:"hip",id:"obers",name:"Ober's test",aka:"",struct:"Iliotibial band / TFL",
+ how:["Position the patient side-lying with the affected leg up.","Abduct and slightly extend the hip, then let the leg lower toward the couch."],
+ pos:"The leg stays abducted and will not drop toward the table.",
+ means:"Iliotibial band or tensor fasciae latae tightness.",
+ pearl:"Keep the hip in slight extension, otherwise the band slips forward over the greater trochanter and the test loses validity."},
+
+/* ===================== KNEE ===================== */
+{r:"knee",id:"lachman",name:"Lachman test",aka:"",struct:"Anterior cruciate ligament (ACL)",
+ how:["Flex the knee to 20 to 30 degrees.","Stabilise the femur with one hand and pull the tibia forward with the other."],
+ pos:"Increased anterior translation with a soft or absent end-point.",
+ means:"ACL tear.",
+ pearl:"The most sensitive ACL test and the most reliable acutely, since it needs less flexion and provokes less guarding than the anterior drawer."},
+{r:"knee",id:"anterior-drawer-knee",name:"Anterior drawer (knee)",aka:"",struct:"Anterior cruciate ligament (ACL)",
+ how:["Flex the knee to 90 degrees with the foot flat, sit lightly on the foot to stabilise.","Pull the tibia forward."],
+ pos:"Increased anterior translation compared with the other knee.",
+ means:"ACL insufficiency.",
+ pearl:"Less sensitive than Lachman in the acute setting because pain and hamstring guarding limit it. Always compare sides."},
+{r:"knee",id:"posterior-drawer",name:"Posterior drawer",aka:"",struct:"Posterior cruciate ligament (PCL)",
+ how:["Flex the knee to 90 degrees with the foot flat.","Push the tibia backward."],
+ pos:"Increased posterior translation of the tibia.",
+ means:"PCL tear.",
+ pearl:"Check the starting position first, a tibia already sagging back can fake a positive anterior drawer. Confirm the baseline with the posterior sag."},
+{r:"knee",id:"posterior-sag",name:"Posterior sag (Godfrey)",aka:"Godfrey test",struct:"Posterior cruciate ligament (PCL)",
+ how:["Flex both hips and knees to 90 degrees, supporting the ankles.","View the knees from the side and compare the tibial contours."],
+ pos:"The affected tibia sags posteriorly compared with the other side.",
+ means:"PCL injury.",
+ pearl:"A quick visual screen that also protects you from misreading the drawer tests when the tibia starts out sagging."},
+{r:"knee",id:"mcmurrays",name:"McMurray's test",aka:"",struct:"Meniscus",
+ how:["Fully flex the knee.","Externally rotate the tibia and extend for the medial meniscus, internally rotate and extend for the lateral meniscus."],
+ pos:"A painful click or thud felt along the joint line.",
+ means:"Meniscal tear.",
+ pearl:"Can be uncomfortable in an acutely swollen knee. A negative test does not exclude a meniscal tear, so weigh it with joint line tenderness and the history."},
+{r:"knee",id:"thessaly",name:"Thessaly test",aka:"",struct:"Meniscus",
+ how:["Support the patient's outstretched hands for balance.","Ask them to stand on the affected leg with the knee flexed to about 20 degrees and rotate the body internally and externally."],
+ pos:"Joint line discomfort, catching or locking.",
+ means:"Meniscal tear.",
+ pearl:"A weight-bearing meniscal test that many find more reliable than McMurray's, when the patient can safely bear weight."},
+{r:"knee",id:"apleys-grind",name:"Apley's grind test",aka:"Apley's compression",struct:"Meniscus",
+ how:["Position the patient prone with the knee flexed to 90 degrees.","Apply downward compression through the heel while rotating the tibia."],
+ pos:"Pain on compression and rotation.",
+ means:"Meniscal injury.",
+ pearl:"If pain is worse on distraction (pulling up) and rotation rather than compression, think ligamentous rather than meniscal."},
+{r:"knee",id:"joint-line-tenderness",name:"Joint line tenderness",aka:"",struct:"Meniscus",
+ how:["Flex the knee and palpate along the medial and lateral joint lines."],
+ pos:"Localised tenderness over the joint line.",
+ means:"Meniscal injury.",
+ pearl:"Sensitive but not specific. Best used alongside McMurray's or Thessaly and the mechanism rather than in isolation."},
+{r:"knee",id:"valgus-stress-knee",name:"Valgus stress test",aka:"",struct:"Medial collateral ligament (MCL)",
+ how:["Test at full extension and again at 30 degrees of flexion.","Apply a valgus (inward) force at the knee while stabilising the ankle."],
+ pos:"Medial pain, laxity or gapping.",
+ means:"MCL injury.",
+ pearl:"Laxity in full extension suggests a more serious combined injury, since bony congruity and the cruciates normally resist valgus there."},
+{r:"knee",id:"varus-stress-knee",name:"Varus stress test",aka:"",struct:"Lateral collateral ligament (LCL)",
+ how:["Test at full extension and at 30 degrees of flexion.","Apply a varus (outward) force at the knee."],
+ pos:"Lateral pain or laxity.",
+ means:"LCL injury.",
+ pearl:"Isolated LCL injuries are uncommon, so a positive varus stress should prompt a look at the posterolateral corner."},
+{r:"knee",id:"patellar-apprehension",name:"Patellar apprehension test",aka:"",struct:"Patellar instability",
+ how:["With the knee slightly flexed and relaxed, gently push the patella laterally."],
+ pos:"Apprehension, guarding or quadriceps contraction to resist.",
+ means:"Patellar instability or a history of lateral dislocation.",
+ pearl:"You are looking for apprehension, not just pain. Stop as soon as the patient guards."},
+{r:"knee",id:"patellar-tap",name:"Patellar tap / ballottement",aka:"Ballottement test",struct:"Effusion (moderate to large)",
+ how:["Milk fluid from the suprapatellar pouch down toward the patella.","Push the patella sharply against the femur."],
+ pos:"The patella bounces back against the femur (a palpable tap).",
+ means:"A moderate to large knee effusion.",
+ pearl:"Best for larger effusions. For a small effusion the sweep test is more sensitive."},
+{r:"knee",id:"sweep-test",name:"Sweep test",aka:"Wipe test, bulge test",struct:"Effusion (small)",
+ how:["Stroke upward along the medial side of the knee to move fluid into the pouch.","Then stroke down the lateral side and watch the medial hollow."],
+ pos:"A fluid wave or bulge reappears in the medial hollow.",
+ means:"A small knee effusion.",
+ pearl:"More sensitive than the patellar tap for subtle effusions that the tap would miss."},
+{r:"knee",id:"pivot-shift",name:"Pivot shift test",aka:"",struct:"ACL / anterolateral rotatory instability",
+ how:["Start with the knee in extension, apply a valgus force and internal rotation.","Slowly flex the knee and feel for the reduction clunk at around 30 degrees."],
+ pos:"A palpable clunk as the subluxed tibia reduces.",
+ means:"ACL deficiency with rotatory instability.",
+ pearl:"Highly specific but hard to elicit in an awake, guarding patient. Often clearest under anaesthesia, so a negative test acutely means little."},
+
+/* ===================== ANKLE & FOOT ===================== */
+{r:"ankle",id:"anterior-drawer-ankle",name:"Anterior drawer (ankle)",aka:"",struct:"Anterior talofibular ligament (ATFL)",
+ how:["Hold the ankle in slight plantarflexion.","Stabilise the tibia and draw the heel and foot forward."],
+ pos:"Increased anterior translation of the talus compared with the other side.",
+ means:"ATFL injury, the most commonly sprained lateral ligament.",
+ pearl:"Best done a few days after injury when acute pain and swelling settle, as early guarding limits it."},
+{r:"ankle",id:"talar-tilt",name:"Talar tilt test",aka:"Inversion stress",struct:"Calcaneofibular ligament (CFL)",
+ how:["Stabilise the lower leg.","Invert the hindfoot to stress the lateral ligaments."],
+ pos:"Increased inversion or gapping compared with the other side.",
+ means:"Calcaneofibular ligament injury, often alongside the ATFL.",
+ pearl:"A positive talar tilt with a positive anterior drawer suggests a more extensive lateral ligament injury."},
+{r:"ankle",id:"simmonds-thompson",name:"Simmonds / Thompson test",aka:"Simmonds-Thompson, calf squeeze",struct:"Achilles tendon rupture",
+ how:["Position the patient prone or kneeling on a chair with the feet hanging free.","Squeeze the calf muscle."],
+ pos:"No plantarflexion of the foot on squeezing.",
+ means:"A complete Achilles tendon rupture.",
+ pearl:"This is the test often called 'Simmons'. A palpable gap in the tendon and a positive squeeze together are strongly suggestive, and a partial tear can still plantarflex, so it does not exclude injury."},
+{r:"ankle",id:"squeeze-test",name:"Squeeze test",aka:"",struct:"Syndesmosis (high ankle sprain)",
+ how:["Compress the tibia and fibula together at the mid-calf, away from the injury."],
+ pos:"Pain referred distally to the syndesmosis.",
+ means:"Syndesmotic (high ankle) injury.",
+ pearl:"High ankle sprains recover more slowly than lateral sprains and change your advice, so it is worth screening for them specifically."},
+{r:"ankle",id:"external-rotation-ankle",name:"External rotation test (Kleiger)",aka:"Kleiger's test",struct:"Syndesmosis / deltoid ligament",
+ how:["Flex the knee to 90 degrees and stabilise the leg.","Externally rotate the foot."],
+ pos:"Pain at the syndesmosis, or medial pain over the deltoid ligament.",
+ means:"Syndesmotic injury (lateral pain) or deltoid ligament injury (medial pain).",
+ pearl:"Pairs well with the squeeze test to build the case for a high ankle sprain."},
+{r:"ankle",id:"windlass",name:"Windlass test",aka:"",struct:"Plantar fasciitis",
+ how:["Ideally with the patient standing on a step, passively dorsiflex the great toe at the MTP joint.","A non-weight-bearing version can be done seated."],
+ pos:"Pain reproduced along the plantar fascia.",
+ means:"Plantar fasciitis.",
+ pearl:"The weight-bearing version is more sensitive, as loading tensions the fascia through the windlass mechanism."}
+];
+
+/* ---- STATE + RENDER ---- */
+let activeRegion = "all";
+let query = "";
+
+function buildChips(){
+  const box = document.getElementById("chips");
+  let html = `<button class="chip all${activeRegion==="all"?" active":""}" onclick="setRegion('all')">All regions</button>`;
+  Object.entries(REGIONS).forEach(([k,v])=>{
+    const n = TESTS.filter(t=>t.r===k).length;
+    const act = activeRegion===k;
+    html += `<button class="chip${act?" active":""}" style="${act?`background:${v.c}`:""}" onclick="setRegion('${k}')">
+      <span class="dot" style="background:${v.c}"></span>${v.label} <span style="opacity:.6">${n}</span></button>`;
+  });
+  box.innerHTML = html;
+}
+
+function setRegion(r){ activeRegion=r; buildChips(); render(); }
+function clearSearch(){ query=""; document.getElementById("search").value=""; document.getElementById("clearBtn").style.display="none"; render(); }
+
+function matches(t){
+  if(activeRegion!=="all" && t.r!==activeRegion) return false;
+  if(!query) return true;
+  const hay = (t.name+" "+t.aka+" "+t.struct+" "+REGIONS[t.r].label+" "+t.how.join(" ")+" "+t.means).toLowerCase();
+  return hay.includes(query);
+}
+
+function testHTML(t){
+  const reg = REGIONS[t.r];
+  let img = "";
+  const path = `images/${t.id}.jpg`;
+  if(DEV){
+    img = `<div class="tfig placeholder"><span>image slot · drop <b>${path}</b> here<br>(any ratio — the whole image is shown)</span></div>`;
+  } else {
+    img = `<figure class="tfig"><img src="${path}" alt="${t.name}" onerror="this.closest('.tfig').remove()"></figure>`;
+  }
+  return `
+  <div class="test" data-id="${t.id}">
+    <button class="test-head" onclick="toggle(this)">
+      <span class="caret">▶</span>
+      <span class="tt">
+        <span class="name">${t.name}</span>
+        ${t.aka?`<span class="aka">also: ${t.aka}</span>`:""}
+      </span>
+      <span class="struct" style="background:${reg.c}">${t.struct}</span>
+    </button>
+    <div class="test-body">
+      ${img}
+      <div class="field"><div class="lab">How to perform</div>
+        <ol class="steps">${t.how.map(s=>`<li>${s}</li>`).join("")}</ol>
+      </div>
+      <div class="pos"><div class="lab">Positive finding</div>${t.pos}</div>
+      <div class="means"><div class="lab">What it means</div>${t.means}</div>
+      ${t.pearl?`<div class="pearl"><div class="lab">Pearl &amp; caveat</div>${t.pearl}</div>`:""}
+    </div>
+  </div>`;
+}
+
+function render(){
+  const shown = TESTS.filter(matches);
+  const results = document.getElementById("results");
+  const no = document.getElementById("noResults");
+  const note = document.getElementById("countNote");
+
+  if(shown.length===0){ results.innerHTML=""; no.style.display="block"; note.textContent=""; return; }
+  no.style.display="none";
+  note.textContent = `${shown.length} test${shown.length>1?"s":""} shown${query?` for "${query}"`:""}${DEV?" · builder mode (image filenames visible)":""}`;
+
+  let html = "";
+  Object.entries(REGIONS).forEach(([k,v])=>{
+    const inReg = shown.filter(t=>t.r===k);
+    if(inReg.length===0) return;
+    html += `<section class="region">
+      <div class="region-head"><span class="bar" style="background:${v.c}"></span>
+        <h3>${v.label}</h3><span class="n">${inReg.length}</span></div>
+      ${inReg.map(testHTML).join("")}
+    </section>`;
+  });
+  results.innerHTML = html;
+}
+
+function toggle(btn){ btn.closest(".test").classList.toggle("open"); }
+
+document.getElementById("search").addEventListener("input",(e)=>{
+  query = e.target.value.trim().toLowerCase();
+  document.getElementById("clearBtn").style.display = query?"block":"none";
+  render();
+});
+
+buildChips();
+render();
+</script>
+</body>
+</html>
